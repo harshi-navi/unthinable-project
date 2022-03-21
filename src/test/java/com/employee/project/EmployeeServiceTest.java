@@ -96,14 +96,14 @@ public class EmployeeServiceTest {
     @Test
     public void fetchAllEmployeesFromDBTest() throws Exception{
         Mockito.when(employeeRepository.findAll()).thenReturn(TestDataProvider.getAllEmployeesData());
-        List<Employee> departments = employeeService.fetchAllEmployees();
+        List<Employee> departments = employeeService.fetchAllEmployees(0,10);
         Assert.assertEquals(departments.get(0).getId(), Integer.valueOf(1));
     }
 
     @Test
     public void fetchAllEmployeesEmptyResponseFromDBTest() throws Exception{
         Mockito.when(employeeRepository.findAll()).thenReturn(Collections.emptyList());
-        Assert.assertEquals( employeeService.fetchAllEmployees(), Collections.emptyList());
+        Assert.assertEquals( employeeService.fetchAllEmployees(0,10), Collections.emptyList());
     }
 
 }

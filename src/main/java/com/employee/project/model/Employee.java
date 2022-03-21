@@ -18,8 +18,8 @@ public class Employee implements Serializable {
 
     @Id
     @Column(name = "id")
-    @JsonProperty("id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @JsonProperty("name")
     @Column(name = "name")

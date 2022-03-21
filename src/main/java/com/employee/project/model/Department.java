@@ -18,7 +18,7 @@ public class Department implements Serializable {
 
     @Id
     @Column(name = "id")
-    @JsonProperty("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name")

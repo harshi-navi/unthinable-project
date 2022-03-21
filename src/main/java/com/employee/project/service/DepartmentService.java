@@ -6,6 +6,7 @@ import com.employee.project.repository.DepartmentRepository;
 import com.employee.project.model.Department;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,13 +43,14 @@ public class DepartmentService {
         throw new Exception("department id doesn't exist");
     }
 
-    public List<Department> fetchAllDepartments() {
-        return departmentRepository.findAll();
+    public List<Department> fetchAllDepartments(int page, int limit) {
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Department> departmentsInPages = departmentRepository.findAll(pageableRequest);
+        return departmentsInPages.getContent();
     }
 
     public boolean isDepartmentExistsForId(int id) {
         Department department = departmentRepository.getDepartmentById(id);
-        if(department != null) return true;
-        return false;
+        return department != null;
     }
 }

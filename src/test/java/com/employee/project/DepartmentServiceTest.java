@@ -71,13 +71,13 @@ public class DepartmentServiceTest {
     @Test
     public void fetchAllDepartmentsFromDBTest() throws Exception{
         Mockito.when(departmentRepository.findAll()).thenReturn(TestDataProvider.getAllDepartmentsData());
-        List<Department> departments = departmentService.fetchAllDepartments();
+        List<Department> departments = departmentService.fetchAllDepartments(0,10);
         Assert.assertEquals(departments.get(0).getName(), "FINANCE");
     }
 
     @Test
     public void fetchAllDepartmentsEmptyResponseFromDBTest() throws Exception{
         Mockito.when(departmentRepository.findAll()).thenReturn(Collections.emptyList());
-        Assert.assertEquals( departmentService.fetchAllDepartments(), Collections.emptyList());
+        Assert.assertEquals( departmentService.fetchAllDepartments(0,10), Collections.emptyList());
     }
 }

@@ -6,6 +6,7 @@ import com.employee.project.repository.EmployeeRepository;
 import com.employee.project.model.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,7 +61,9 @@ public class EmployeeService {
         throw new Exception("employee id doesn't exist");
     }
 
-    public List<Employee> fetchAllEmployees() {
-        return employeeRepository.findAll();
+    public List<Employee> fetchAllEmployees(int page, int limit) {
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Employee> employeesInPages = employeeRepository.findAll(pageableRequest);
+        return employeesInPages.getContent();
     }
 }
